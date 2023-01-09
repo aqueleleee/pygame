@@ -1,0 +1,63 @@
+    
+    
+from pygame import *
+
+#создай окно игры
+window = display.set_mode((700,500))
+display.set_caption('Догонялки')
+#задай фон сцены;;;;;;;;;;;b
+background = transform.scale(image.load('background.png'),
+                                            (700,500))
+window.blit(background,(0, 0 ))
+#создай 2 спрайта и размести их на сцене
+sprite1 = transform.scale(image.load('sprite1.png'), (100,100))
+sprite2 = transform.scale(image.load('sprite2.png'), (100,100))
+
+x1, y1 = 400, 400
+x2, y2 = 600, 400
+
+clock = time.Clock()
+FPS = 60
+
+#обработай событие «клик по кнопке "Закрыть окно"»
+
+
+
+
+
+def key_up(key, cord):
+    if keys_pressed[key] and cord > 10:
+        return cord - 10
+def key_down(key, cord):
+    if keys_pressed[key] and cord < 400:
+        return cord + 10
+def key_left(key, cord):
+    if keys_pressed[key] and cord > 10:
+        return cord - 10
+def key_right(key, cord):
+    if keys_pressed[key] and cord < 695:
+        return cord + 10
+ 
+
+game = True
+while game:
+    clock.tick(FPS) 
+    window.blit(background,(0, 0))
+    window.blit(sprite1, (x1,y1))
+    window.blit(sprite2, (x2,y2))
+
+    keys_pressed = key.get_pressed()
+    y1 = key_up(K_UP, y1)
+    y2 = key_up(K_w, y2)
+    y1 = key_down(K_DOWN, y1)
+    y2 = key_down(K_s, y2)
+    x1 = key_left(K_LEFT, x1)
+    x2 = key_left(K_a, x2)
+    x1 = key_right(K_RIGHT, x1)
+    x2 = key_right(K_d, x2)
+
+    for e in event.get():
+        if e.type == QUIT:
+          game = False
+
+    display.update()
